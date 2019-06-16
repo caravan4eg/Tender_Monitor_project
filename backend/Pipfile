@@ -13,6 +13,10 @@ django-filter = "*"
 django-filters = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
+scrapy = "*"
+scrapy-djangoitem = "*"
+requests = "*"
+bs4 = "*"
 
 [requires]
 python_version = "3.7"
