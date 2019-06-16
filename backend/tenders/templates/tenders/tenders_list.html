@@ -1,0 +1,9 @@
+<h1>All tenders from DataBase</h1>
+{% for tender in object_list %}
+  <ul>
+    <li>Title: {{ tender.number }}</li>
+    <li>Description: {{ tender.description }}</li>
+    <li>Price: {{ tender.price }}</li>
+    <li>Deadline: {{ tender.deadline }}</li>
+  </ul>
+{% endfor %}

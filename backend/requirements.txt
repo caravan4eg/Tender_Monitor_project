@@ -1,0 +1,13 @@
+dj-database-url
+django
+django-cors-headers
+django-filter
+django-filters
+django-heroku
+djangorestframework
+gunicorn
+psycopg2
+psycopg2-binary
+pytz
+sqlparse
+whitenoise
