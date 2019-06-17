@@ -1,21 +1,13 @@
-# -*- coding: utf-8 -*-
-
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://doc.scrapy.org/en/latest/topics/items.html
-
-# import scrapy
-
-
-# class ScraperItem(scrapy.Item):
-#     # define the fields for your item here like:
-#     # name = scrapy.Field()
-#     pass
-
 ## items.py
+import scrapy
 from scrapy_djangoitem import DjangoItem
-from tenders.models import Tenders
+from tenders import models
+
 
 class TendersItem(DjangoItem):
+    """
+    Create item - container for scraped data.
+    Fields for this item are automatically created 
+    from the django model
+    """
     django_model = Tenders

@@ -31,33 +31,26 @@ from scrapy.utils.project import get_project_settings
 
 from scraper.items import TendersItem
 
-# db = PostgresqlDatabase(database='tender_monitor_db', user='postgres', password='1', host='localhost')
-
-
-# class Icetrade(peewee.Model):
-#     number = peewee.TextField(unique=True)
-#     customer = peewee.TextField()
-#     description = peewee.TextField()
-#     price = peewee.CharField()
-#     deadline = peewee.DateField()
-#     country = peewee.CharField()
-#     url_addr = peewee.TextField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
-
-#     class Meta:
-#         database = db
-
 
 class IceSpiderSpider(scrapy.Spider):
+    #name of the spider
     name = 'ice_spider'
+    
+    #list of allowed domains and start urls
     allowed_domains = ['icetrade.by']
     start_urls = [params.start_urls]
+
     today_is = date.today().strftime("%d.%m.%Y")
     save_to_file = f'csv/{today_is}_Scrapy.csv'
+    
+    #location of csv file
+    custom_settings = {
+                        'FEED_URI': 'tmp/icetrade_tenders.csv' 
+                    }
 
     def parse(self, response):
+        """ Get page url
+        """
         last_page = response.xpath('//div[@id="content"]/div[@class="paging"]/a[9]/text()').get().strip()
 
         for i in range(int(last_page)+1):
@@ -66,25 +59,25 @@ class IceSpiderSpider(scrapy.Spider):
             yield scrapy.Request(params.url_pattern.format(str(i)), callback=self.parse_page)
 
     def parse_page(self, response):
-        # prepare csv file - writing headers
+        """ Extract tender information 
+        """
+        data = response.xpath('//*/tr[contains(@class, "rw")]')
+        
+        for line in data:
+            item = TendersItem()
+            item['number'] = line.xpath('.//td[4]/text()').get().strip()
+            item['customer'] = line.xpath('.//td[2]/text()').get().strip()
+            item['description'] = line.xpath('.//td[1]/a/text()').get().strip()
+            item['price'] = line.xpath('.//td[5]/span/text()').get().strip()
+            item['deadline'] = line.xpath('.//td[6]/text()').get().strip()
+            item['country'] = line.xpath('.//td[3]/text()').get().strip()
+            item['url_addr'] = line.xpath('.//td[1]/a/@href').get()
+            # item['research_date'] = self.today_is
 
-
-        # scrape info
-        for tender in response.xpath('//*/tr[contains(@class, "rw")]'):
-            icetrade_item = TendersItem()
-            icetrade_item['number'] = tender.xpath('.//td[4]/text()').get().strip()
-            icetrade_item['customer'] = tender.xpath('.//td[2]/text()').get().strip()
-            icetrade_item['description'] = tender.xpath('.//td[1]/a/text()').get().strip()
-            icetrade_item['price'] = tender.xpath('.//td[5]/span/text()').get().strip()
-            icetrade_item['deadline'] = tender.xpath('.//td[6]/text()').get().strip()
-            icetrade_item['country'] = tender.xpath('.//td[3]/text()').get().strip()
-            icetrade_item['url_addr'] = tender.xpath('.//td[1]/a/@href').get()
-            # icetrade_item['research_date'] = self.today_is
-
-
-            print('Processing tender:', icetrade_item['number'], icetrade_item['customer'])
+            print('Processing tender:', item['number'], item['customer'])
 
             # store items to csv file
+            # перенести в pipline
             with open(self.save_to_file, 'a') as f:
                 order = [
                         'number', 'customer', 'description',
@@ -92,16 +85,21 @@ class IceSpiderSpider(scrapy.Spider):
                         'created_at', 'updated_at'
                         ]
                 writer = csv.DictWriter(f, fieldnames=order)
-                writer.writerow(icetrade_item)
+                writer.writerow(item)
             
-            yield icetrade_item # ???
+            yield item # ???
 
 
 def get_proxy_list():
+    """Get proxy list
+    """
+    
     try:
-        
+        # First purge old files
         open('list.txt', 'w').close()
         open(IceSpiderSpider.save_to_file, 'w').close()
+
+        # Then write down row
         with open(IceSpiderSpider.save_to_file, 'a') as f:
             order = [
                     'number', 'customer', 'description',
@@ -110,8 +108,10 @@ def get_proxy_list():
                 ]
             writer = csv.DictWriter(f, fieldnames=order)
             writer.writeheader()
+    
     except:
         print('Skeeping purge old file...')
+    
     html = requests.get('https://free-proxy-list.net/').text
     soup = BeautifulSoup(html, 'lxml')
 
