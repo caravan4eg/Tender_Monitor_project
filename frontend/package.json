@@ -6,7 +6,10 @@
   "dependencies": {
     "next": "^8.1.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "rebass": "^3.1.1",
+    "styled-components": "^4.3.1",
+    "styled-system": "^5.0.6"
   },
   "scripts": {
     "dev": "next",
