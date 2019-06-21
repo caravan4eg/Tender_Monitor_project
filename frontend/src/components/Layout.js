@@ -3,7 +3,6 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Header } from 'src/components/Header'
 import { ExtraHeader } from 'src/components/ExtraHeader'
 import { Footer } from 'src/components/Footer'
-import { Container } from 'src/components/Container'
 
 const theme = {
   colors: {
@@ -19,9 +18,9 @@ export const Layout = ({ children }) => {
         <ExtraHeader />
       </ThemeProvider>
       <Header />
-      <main>
-        <Container>{children}</Container>
-      </main>
+      <ThemeProvider theme={theme}>
+        <main>{children}</main>
+      </ThemeProvider>
       <Footer />
     </>
   )
