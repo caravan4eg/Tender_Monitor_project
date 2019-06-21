@@ -1,13 +1,23 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
 import { Header } from 'src/components/Header'
+import { ExtraHeader } from 'src/components/ExtraHeader'
 import { Footer } from 'src/components/Footer'
 import { Container } from 'src/components/Container'
+
+const theme = {
+  colors: {
+    red: '#fb505d',
+  },
+}
 
 export const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <ExtraHeader />
+      </ThemeProvider>
       <Header />
       <main>
         <Container>{children}</Container>
