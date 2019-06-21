@@ -31,6 +31,7 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
 from scraper.items import TendersItem
+from datetime import datetime
 
 
 class IceSpiderSpider(scrapy.Spider):
@@ -47,7 +48,7 @@ class IceSpiderSpider(scrapy.Spider):
     
     # location of csv file
     custom_settings = {
-                        'FEED_URI': 'tmp/icetrade_tenders.csv' 
+                        'FEED_URI': 'output/icetrade_tenders.csv' 
                     }
 
     def parse(self, response):
@@ -55,8 +56,8 @@ class IceSpiderSpider(scrapy.Spider):
 
         last_page = response.xpath('//div[@id="content"]/div[@class="paging"]/a[9]/text()').get().strip()
 
-        for i in range(int(last_page)+1):
-        # for i in range(1):
+        # for i in range(int(last_page)+1):
+        for i in range(1):
             print('Processing page: ' + str(i))
             yield scrapy.Request(params.url_pattern.format(str(i)), callback=self.parse_page)
 
@@ -71,25 +72,16 @@ class IceSpiderSpider(scrapy.Spider):
             item['customer'] = line.xpath('.//td[2]/text()').get().strip()
             item['description'] = line.xpath('.//td[1]/a/text()').get().strip()
             item['price'] = line.xpath('.//td[5]/span/text()').get().strip()
-            item['deadline'] = line.xpath('.//td[6]/text()').get().strip()
             item['country'] = line.xpath('.//td[3]/text()').get().strip()
             item['url_addr'] = line.xpath('.//td[1]/a/@href').get()
-            # item['research_date'] = self.today_is
-
-            print('Processing tender:', item['number'], item['customer'])
-
-            # store items to csv file
-            # перенести в pipline
-            with open(self.save_to_file, 'a') as f:
-                order = [
-                        'number', 'customer', 'description',
-                        'price', 'deadline', 'country', 'url_addr', 
-                        'created_at', 'updated_at'
-                        ]
-                writer = csv.DictWriter(f, fieldnames=order)
-                writer.writerow(item)
             
-            yield item # ???
+            # change date format dd-mm-yyyy --> yyyy-mm-dd
+            ddmmyyyy = line.xpath('.//td[6]/text()').get().strip()
+            yyyymmdd = ddmmyyyy[6:] + "-" + ddmmyyyy[3:5] + "-" + ddmmyyyy[:2]
+            item['deadline'] = yyyymmdd
+         
+            print('\n***** Store extracted tender data to Item  **********')
+            yield item
 
 
 def get_proxy_list():
@@ -138,53 +130,50 @@ def get_proxy_list():
 #     process.start()  # the script will block here until the crawling is finished
 
 
-def main():
-    get_proxy_list()
+# def main():
+#     get_proxy_list()
     
     # в джанго типа не нужно тк запускается из commands/crawl.py
     # run_spider()
 
-    print('********* Processing data to DATABASE...**************')
+    # print('********* Processing data to DATABASE...**************')
     # db.connect()
     # db.create_tables([Icetrade])
 
-    with open(IceSpiderSpider.save_to_file) as file:
+    # with open(IceSpiderSpider.save_to_file) as file:
 
-        # order = ['number', 'customer', 'description', 'price', 'deadline', 'country', 'url_addr', 'research_date']
-        reader = csv.DictReader(file)
+    #     # order = ['number', 'customer', 'description', 'price', 'deadline', 'country', 'url_addr', 'research_date']
+    #     reader = csv.DictReader(file)
 
-        tenders = list(reader)
-        idx = 1
+    #     tenders = list(reader)
+    #     idx = 1
 
-        with db.atomic():
+    #     with db.atomic():
 
-            for tender in tenders[1:]:  # 1-st row are headers
+    #         for tender in tenders[1:]:  # 1-st row are headers
 
-                # Checking if tender already exists in DB
-                exists = TendersItem.select().where(TendersItem.number == tender['number'])
+    #             # Checking if tender already exists in DB
+    #             exists = TendersItem.select().where(TendersItem.number == tender['number'])
 
-                # if not exists then add to DB
-                if not bool(exists):
-                    TendersItem.create(
-                            number=tender['number'],
-                            customer=tender['customer'],
-                            description=tender['description'],
-                            price=tender['price'],
-                            deadline=tender['deadline'],
-                            country=tender['country'],
-                            url_addr=tender['url_addr'],
-                            research_date=tender['research_date'],
-                          )
-                    print(f'{idx}. New tender: {tender["number"]}')
-                else:
-                    print(f'{idx}. Old tender, won\'t be added to DB: {tender["number"]}')
-                idx += 1
+    #             # if not exists then add to DB
+    #             if not bool(exists):
+    #                 TendersItem.create(
+    #                         number=tender['number'],
+    #                         customer=tender['customer'],
+    #                         description=tender['description'],
+    #                         price=tender['price'],
+    #                         deadline=tender['deadline'],
+    #                         country=tender['country'],
+    #                         url_addr=tender['url_addr'],
+    #                         research_date=tender['research_date'],
+    #                       )
+    #                 print(f'{idx}. New tender: {tender["number"]}')
+    #             else:
+    #                 print(f'{idx}. Old tender, won\'t be added to DB: {tender["number"]}')
+    #             idx += 1
 
             # Insert to DB by bunches in 100 rows
             # for index in range(0, len(tenders), 100):
             #     Icetrade.insert_many(tenders[index:index + 100]).execute()
             #     print(index)
 
-
-if __name__ == '__main__':
-    main()

@@ -1,4 +1,5 @@
 from django.db import models
+from tender_monitor_project.settings import DATE_INPUT_FORMATS
 
 
 class Tenders(models.Model):

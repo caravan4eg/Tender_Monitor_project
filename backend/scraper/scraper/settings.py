@@ -1,13 +1,24 @@
 # -*- coding: utf-8 -*-
 
 # Scrapy settings for scraper project
-#
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     https://doc.scrapy.org/en/latest/topics/settings.html
-#     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
+
+# IMPORT DJANGO SETTINGS
+# --------------------------------------------------------------
+import os
+import sys
+
+PROJECT_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+    )
+# sys.path.append(os.path.join(PROJECT_DIR, 'tender_monitor_project'))
+sys.path.append(os.path.dirname(os.path.abspath('.')))
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'tender_monitor_project.settings'
+
+import django
+django.setup()
+
+# ---------------------------------------------------------------------
 
 BOT_NAME = 'scraper'
 
@@ -16,7 +27,7 @@ NEWSPIDER_MODULE = 'scraper.spiders'
 
 # Export as CSV Feed
 FEED_FORMAT = "csv"
-FEED_URI = "output/tenders.csv"
+# FEED_URI = "output/tenders.csv"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scraper (+http://www.yourdomain.com)'
