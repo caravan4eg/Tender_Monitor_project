@@ -13,7 +13,8 @@ https://pypi.org/project/Scrapy-UserAgents/
         - get data from DB (get_report.py) with plus words (exclude results with minus words and after deadline)
 9. v2.7 - Item Pipeline
 
-TODO: save results to DB and csv by scrapy inner tools
+TODO: save scraped data with Item (DjangoItem) & Pipline to
+PostgreSQL database and CSV
 TODO: run multiple spiders
 TODO: run from Scrapinghub Cloud
 TODO: scheduled launch
@@ -33,24 +34,25 @@ from scraper.items import TendersItem
 
 
 class IceSpiderSpider(scrapy.Spider):
-    #name of the spider
+    """ Extract data from icetrade.by"""
+    # name of the spider
     name = 'ice_spider'
     
-    #list of allowed domains and start urls
+    # list of allowed domains and start urls
     allowed_domains = ['icetrade.by']
     start_urls = [params.start_urls]
 
     today_is = date.today().strftime("%d.%m.%Y")
     save_to_file = f'csv/{today_is}_Scrapy.csv'
     
-    #location of csv file
+    # location of csv file
     custom_settings = {
                         'FEED_URI': 'tmp/icetrade_tenders.csv' 
                     }
 
     def parse(self, response):
-        """ Get page url
-        """
+        """ Get page url """
+
         last_page = response.xpath('//div[@id="content"]/div[@class="paging"]/a[9]/text()').get().strip()
 
         for i in range(int(last_page)+1):
@@ -59,8 +61,8 @@ class IceSpiderSpider(scrapy.Spider):
             yield scrapy.Request(params.url_pattern.format(str(i)), callback=self.parse_page)
 
     def parse_page(self, response):
-        """ Extract tender information 
-        """
+        """ Extract tender information """
+
         data = response.xpath('//*/tr[contains(@class, "rw")]')
         
         for line in data:

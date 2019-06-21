@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 ## items.py
-import scrapy
 from scrapy_djangoitem import DjangoItem
 from tenders import models
 
@@ -10,4 +10,4 @@ class TendersItem(DjangoItem):
     Fields for this item are automatically created 
     from the django model
     """
-    django_model = Tenders
+    django_model = models.Tenders

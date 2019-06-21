@@ -13,8 +13,8 @@ class TendersPipeline(object):
     def open_spider(self, spider):
         hostname = 'localhost'
         username = 'postgres'
-        password = '1' # your password
-        database = 'tender_monitor_db.tenders' # ???
+        password = '1'
+        database = 'tender_monitor_db' # ???
         self.connection = psycopg2.connect(host=hostname, user=username, password=password, dbname=database)
         self.cur = self.connection.cursor()
 
@@ -23,6 +23,10 @@ class TendersPipeline(object):
         self.connection.close()
 
     def process_item(self, item, spider):
+        # здесь обработка
+        # ...
+        
+        # здесь сохранение в базу
         item.save()
         return item
 

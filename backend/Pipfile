@@ -17,6 +17,8 @@ scrapy = "*"
 scrapy-djangoitem = "*"
 requests = "*"
 bs4 = "*"
+scrapy-useragents = "*"
+scrapy-proxies = "*"
 
 [requires]
 python_version = "3.7"
