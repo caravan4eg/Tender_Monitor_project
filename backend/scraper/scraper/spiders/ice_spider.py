@@ -13,12 +13,15 @@ https://pypi.org/project/Scrapy-UserAgents/
         - get data from DB (get_report.py) with plus words (exclude results with minus words and after deadline)
 9. v2.7 - Item Pipeline
 
-TODO: save scraped data with Item (DjangoItem) & Pipline to
-PostgreSQL database and CSV
++++ save scraped data with Item (DjangoItem) & Pipline to PostgreSQL database and CSV
++++ check dublicates through Pipeline
+TODO: get_proxy_list run in separate spider or def() and save to list.txt in pipline
+
+TODO: build in Django
 TODO: run multiple spiders
 TODO: run from Scrapinghub Cloud
 TODO: scheduled launch
-TODO: build in Django
+
 
 '''
 import requests
@@ -33,22 +36,24 @@ from scrapy.utils.project import get_project_settings
 from scraper.items import TendersItem
 from datetime import datetime
 
+import logging
+
 
 class IceSpiderSpider(scrapy.Spider):
     """ Extract data from icetrade.by"""
-    # name of the spider
+
     name = 'ice_spider'
-    
-    # list of allowed domains and start urls
     allowed_domains = ['icetrade.by']
     start_urls = [params.start_urls]
 
     today_is = date.today().strftime("%d.%m.%Y")
-    save_to_file = f'csv/{today_is}_Scrapy.csv'
+    
+    # save_to_file = f'output/{today_is}_icetrade_tenders.csv'
+    # FEED_URI': 'output/icetrade_tenders.csv' 
     
     # location of csv file
     custom_settings = {
-                        'FEED_URI': 'output/icetrade_tenders.csv' 
+                        'FEED_URI': f'output/{today_is}_icetrade_tenders.csv'
                     }
 
     def parse(self, response):
@@ -56,8 +61,8 @@ class IceSpiderSpider(scrapy.Spider):
 
         last_page = response.xpath('//div[@id="content"]/div[@class="paging"]/a[9]/text()').get().strip()
 
-        # for i in range(int(last_page)+1):
-        for i in range(1):
+        for i in range(int(last_page)+1):
+        # for i in range(3):  # scrape some pages for test, not all
             print('Processing page: ' + str(i))
             yield scrapy.Request(params.url_pattern.format(str(i)), callback=self.parse_page)
 
@@ -80,7 +85,9 @@ class IceSpiderSpider(scrapy.Spider):
             yyyymmdd = ddmmyyyy[6:] + "-" + ddmmyyyy[3:5] + "-" + ddmmyyyy[:2]
             item['deadline'] = yyyymmdd
          
-            print('\n***** Store extracted tender data to Item  **********')
+            self.logger.info('**** Well, <%s> transfers data to TendersItem.', 
+                            self.name)
+ 
             yield item
 
 
