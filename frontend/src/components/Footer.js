@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Footer = () => {
   return (
     <Root>
-      <span>Copyright © {new Date().getFullYear()} TenderMonitor, Inc.</span>
+      <span>Copyright © {new Date().getFullYear()} TenderMonitor, Inc. 👋</span>
     </Root>
   )
 }

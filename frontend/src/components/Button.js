@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 
-export const Button = ({ children }) => {
-  return <StyledButton>{children}</StyledButton>
-}
-
-const StyledButton = styled.button`
+export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.red};
   border: 0;
   border-radius: 8px;

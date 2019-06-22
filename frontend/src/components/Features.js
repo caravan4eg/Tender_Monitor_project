@@ -44,6 +44,8 @@ export const Features = () => {
 }
 
 const Root = styled.header`
+  border-bottom: 1px solid #eee;
+  padding-bottom: 56px;
   ul {
     padding: 0;
     margin: 0;

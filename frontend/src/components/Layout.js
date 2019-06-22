@@ -15,13 +15,13 @@ export const Layout = ({ children }) => {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <ExtraHeader />
+        <>
+          <ExtraHeader />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </>
       </ThemeProvider>
-      <Header />
-      <ThemeProvider theme={theme}>
-        <main>{children}</main>
-      </ThemeProvider>
-      <Footer />
     </>
   )
 }
