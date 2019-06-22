@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 
-import { Container } from 'src/components/Container'
+import { Container } from './Container'
 
 export const Header = () => {
   return (

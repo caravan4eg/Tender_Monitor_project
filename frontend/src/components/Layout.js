@@ -1,8 +1,8 @@
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
-import { Header } from 'src/components/Header'
-import { ExtraHeader } from 'src/components/ExtraHeader'
-import { Footer } from 'src/components/Footer'
+import { Header } from './Header'
+import { ExtraHeader } from './ExtraHeader'
+import { Footer } from './Footer'
 
 const theme = {
   colors: {

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Container } from 'src/components/Container'
-import { Button } from 'src/components/Button'
+import { Container } from './Container'
+import { Button } from './Button'
 
 export const CallToAction = () => {
   return (
