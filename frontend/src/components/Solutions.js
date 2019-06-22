@@ -9,11 +9,11 @@ const cards = [
   },
   {
     image: 'https://cdn.buttercms.com/T63cTahMT9qwO5psJGWM',
-    title: 'SMS spam detection',
+    title: 'MMS spam detection',
   },
   {
     image: 'https://cdn.buttercms.com/T63cTahMT9qwO5psJGWM',
-    title: 'SMS spam detection',
+    title: 'DMS spam detection',
   },
 ]
 

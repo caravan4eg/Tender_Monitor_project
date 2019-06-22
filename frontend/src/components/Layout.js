@@ -37,5 +37,9 @@ const GlobalStyle = createGlobalStyle`
     transition: all 0.4s cubic-bezier(0.3, 0.8, 0.2, 1) 0s;
     margin: 0;
     padding: 0;
+
+    & > * {
+      box-sizing: border-box;
+    }
   }
 `

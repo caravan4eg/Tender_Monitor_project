@@ -9,4 +9,7 @@ const Root = styled.div`
   width: 1140px;
   margin-left: auto;
   margin-right: auto;
+
+  padding-left: 16px;
+  padding-right: 16px;
 `

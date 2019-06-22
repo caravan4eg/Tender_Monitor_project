@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 
 import { Container } from './Container'
 import { Button } from './Button'
@@ -12,7 +13,9 @@ export const Hero = () => {
         <Inner>
           <h1>Мониторинг тендеров и конкурсных закупок</h1>
           <h2>Пользуясь сервисом ТендерМонитор вы можете сосредоточиться на главном, а рутину предоставьте нам. </h2>
-          <Button>Давайте попробуем</Button>
+          <Link href="/fetch">
+            <Button>Давайте попробуем</Button>
+          </Link>
         </Inner>
         <Promo src={heroIllustration} alt="" />
       </Container>
