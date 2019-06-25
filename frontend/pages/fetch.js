@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import fetch from 'isomorphic-unfetch'
+import ky from 'ky-universal'
 
 import { Layout } from '../src/components/Layout'
 
@@ -10,7 +10,6 @@ export const FetchPage = ({ data }) => {
         {data.map(({ score, show: { id } }) => (
           <h1 key={id}>{score}</h1>
         ))}
-        <span>Copyright © {new Date().getFullYear()} TenderMonitor, Inc. 👋</span>
       </Root>
     </Layout>
   )
@@ -19,7 +18,7 @@ export const FetchPage = ({ data }) => {
 export default FetchPage
 
 FetchPage.getInitialProps = async () => {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
+  const res = await ky('https://api.tvmaze.com/search/shows?q=batman')
   const data = await res.json()
   return { data }
 }

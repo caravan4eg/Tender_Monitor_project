@@ -49,7 +49,7 @@ const Inner = styled.section`
 const Card = styled.article`
   flex-basis: calc(100% / 3 - 24px);
   border-radius: 8px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.02), 0 5px 15px rgba(0, 0, 0, 0.02);
 
   img {
     display: block;

@@ -10,7 +10,9 @@ export const Footer = () => {
 
 const Root = styled.footer`
   text-align: center;
-  margin-bottom: 40px;
+  padding-bottom: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
 
   span {
     font-size: 0.875rem;
