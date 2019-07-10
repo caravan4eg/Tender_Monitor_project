@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Tender Monitor workflow</h1>
+What was done description.
 
 <ul>
     <li>+ Make simple Django Web server with HTML pages</li>
@@ -40,6 +41,11 @@
     <li>- Tune up periodic crawling </li>
     <ul>
         <li>- Install Celery and Redis</li>
+        pip install -U Celery
+        touch django_project/celery.py
+        update  django_project/__init__.py
+        add redis celery config to # django_project/settings.py
+
         <li>- Create celery.py and tasks.py </li>
         <li>- Check periodic task </li>
     </ul>

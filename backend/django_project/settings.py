@@ -144,3 +144,28 @@ REST_FRAMEWORK = {
     #     ),
 
  }
+
+# django_project/settings.py
+# ---------------------------------
+# |    REDIS related settings     |
+# ---------------------------------
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600} 
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+
+# CELERY SETTINGS
+CELERY_BROKER_URL = 'redis://localhost'
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'redis_cache.RedisCache',
+#         'LOCATION': '/var/run/redis/redis.sock',
+#     },
+# }
+CELERY_WORKER_MAX_TASKS_PER_CHILD=1
