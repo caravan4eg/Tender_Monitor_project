@@ -23,8 +23,8 @@ class IceSpiderSpider(scrapy.Spider):
     today_is = date.today().strftime("%d.%m.%Y")
     custom_settings = {
                     
-                    'CONCURRENT_REQUESTS': 3,
-                    'CONCURRENT_REQUESTS_PER_DOMAIN': 3,
+                    'CONCURRENT_REQUESTS': 2,
+                    'CONCURRENT_REQUESTS_PER_DOMAIN': 2,
                     'FEED_FORMAT': 'csv',
                     'FEED_URI': f'output/{today_is}_icetrade_tenders.csv',
                 }
@@ -93,8 +93,8 @@ class IceSpiderSpider(scrapy.Spider):
         sleep(randint(1,3))
         last_page = response.xpath('//div[@id="content"]/div[@class="paging"]/a[9]/text()').get().strip()
 
-        # for i in range(int(last_page)+1):
-        for i in range(1):  # scrape some pages for test, not all
+        for i in range(int(last_page)+1):
+        # for i in range(1):  # scrape some pages for test, not all
             
             # request next page and callback to Parse page function
             logging.info(f'==========  Processing page: {str(i)}  ===========')

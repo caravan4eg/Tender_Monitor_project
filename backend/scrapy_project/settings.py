@@ -20,7 +20,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 15
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -81,3 +81,40 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# ------------------------------------------------------------------
+# USER AGENTS ROTATING 
+# Scrapy-UserAgents 
+#  pip install scrapy-useragents
+#  https://www.scrapehero.com/how-to-fake-and-rotate-user-agents-using-python-3/
+# ------------------------------------------------------------------
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy_useragents.downloadermiddlewares.useragents.UserAgentsMiddleware': 500,
+}
+
+USER_AGENTS = [
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/57.0.2987.110 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/61.0.3163.79 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:55.0) '
+     'Gecko/20100101 '
+     'Firefox/55.0'),  # firefox
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/61.0.3163.91 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/62.0.3202.89 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/63.0.3239.108 '
+     'Safari/537.36'),  # chrome
+]

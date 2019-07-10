@@ -24,20 +24,25 @@
                 api/custompagination.py</li>
         </ul>
     </li>
-    <li> + Tune Scrapy Spider
+    <li> + Tune up Scrapy Spider
         <ul>
-        <li> + scrapy_project/settings.py -> ROBOTSTXT_OBEY = False</li>
-        <li> + scrapy_project/settings.py -> COOKIES_ENABLED = False</li>
-        <li> + Create spider icetrade</li>
-        <li> + Create Items and Pipelines</li>
-        <li> + Update scrapy_project/settings.py -> ITEM_PIPELINES = {'scrapy_project.pipelines.TenderPipeline': 300,} </li>
-        <li> + Spider icetrade: runs manually from terminal-OK, exports to csv-OK, saves PostgreSQL-OK</li>
-    </ul>
+            <li> + scrapy_project/settings.py -> ROBOTSTXT_OBEY = False</li>
+            <li> + scrapy_project/settings.py -> COOKIES_ENABLED = False</li>
+            <li> + Create spider icetrade</li>
+            <li> + Create Items and Pipelines</li>
+            <li> + Update scrapy_project/settings.py -> ITEM_PIPELINES = {'scrapy_project.pipelines.TenderPipeline':
+                300,} </li>
+            <li> + Add User Agent rotate feature (install and updete settings.py )</li>
+            <li> + Spider icetrade: runs manually from terminal-OK, exports to csv-OK, saves PostgreSQL-OK</li>
+        </ul>
     </li>
 
-    <li>- Extract fresh Quotes from site. Scrapy, Proxy, Cookies, User Agent </li>
-    <li>- Process items to Sqlite database. Connect to db, Django ORM, process item</li>
-    <li>- Run periodic background tasks. Celery and Redis </li>
+    <li>- Tune up periodic crawling </li>
+    <ul>
+        <li>- Install Celery and Redis</li>
+        <li>- Create celery.py and tasks.py </li>
+        <li>- Check periodic task </li>
+    </ul>
 </ul>
 
 {% endblock content %}
