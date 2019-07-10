@@ -1,6 +1,7 @@
 # import logging
 import psycopg2
-from  .items import TendersItem
+from  .items import TendersItem, ProxyItem
+from  .items import ProxyItem
 from scrapy.exceptions import DropItem
 
 class TendersPipeline(object):
@@ -20,6 +21,7 @@ class TendersPipeline(object):
         if self.connection:
             self.cur = self.connection.cursor()
             spider.log('**** Well, connection to database is OK! %s' % self.cur)
+            print('~~~~~~~~~~~~ Connection to database is OK! ~~~~~~~~~~')
 
     def close_spider(self, spider):
         self.cur.close()
@@ -48,3 +50,32 @@ class TendersPipeline(object):
         #     item.save()
 
         return item
+
+
+class ProxyPipeline(object):
+    """ Get new proxies from https://free-proxy-list.net/ 
+        and putt them to list.txt
+        List.txt will be used by scrapy_proxy that runs as Middleware 
+        for rotating proxy (https://github.com/aivarsk/scrapy-proxies)
+    """
+    
+    def open_spider(self, spider):
+        # Purge old or create new file with list of proxies
+        # try:
+        #     self.file = open('output/list.txt', 'w').close()
+        #     spider.log('<<<< ProxyPipeline >>>>>: old proxy list deleted successfully. OK')
+    
+        # except:
+        #     spider.log('<<<<< ProxyPipeline >>>>>>: Skeeping purge old file...')
+    
+        # open new proxy list
+        self.file = open('output/list.txt', 'a')
+
+    def process_item(self, item, spider):
+        # write down new proxy to list.txt
+        self.file.write('http://' + item['ip'] + ':' + item['port'] + '\n')
+        spider.log('<<<<< ProxyPipeline >>>>>: processed new proxy url to list.txt...')
+        return item
+
+    def close_spider(self, spider):
+        self.file.close()

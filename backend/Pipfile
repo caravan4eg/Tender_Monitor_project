@@ -4,21 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
 
 [packages]
 django = "*"
-djangorestframework = "*"
-django-filter = "*"
-django-filters = "*"
-psycopg2 = "*"
-psycopg2-binary = "*"
 scrapy = "*"
-scrapy-djangoitem = "*"
-requests = "*"
-bs4 = "*"
-scrapy-useragents = "*"
-scrapy-proxies = "*"
 
 [requires]
 python_version = "3.7"

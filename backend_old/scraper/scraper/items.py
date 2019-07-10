@@ -2,6 +2,7 @@
 ## items.py
 from scrapy_djangoitem import DjangoItem
 from tenders import models
+import scrapy
 
 
 class TendersItem(DjangoItem):
@@ -11,3 +12,9 @@ class TendersItem(DjangoItem):
     from the django model
     """
     django_model = models.Tenders
+
+
+class ProxyItem(scrapy.Item):
+    """ Scraped data is stored here after yield in spider """
+    ip = scrapy.Field()
+    port = scrapy.Field()
