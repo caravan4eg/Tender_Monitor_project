@@ -1,9 +1,8 @@
-const path = require('path')
+const withImages = require('next-images')
 
-module.exports = {
+module.exports = withImages({
   target: 'serverless',
-  webpack(config) {
-    config.resolve.alias['src'] = path.join(__dirname, 'src')
+  webpack(config, options) {
     return config
   },
-}
+})

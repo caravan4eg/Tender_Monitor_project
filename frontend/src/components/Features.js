@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Container } from 'src/components/Container'
+import { Container } from './Container'
 
 export const Features = () => {
   return (
@@ -12,30 +12,21 @@ export const Features = () => {
               <span>1</span>
               <h3>Преимущество</h3>
             </Header>
-            <p>
-              Create your own annotations or automate labeling using our experts. Supervise training in real-time with
-              interactive tools and graphical results.
-            </p>
+            <p>Проповедник с телеэкрана вытягивал из верующих миллионы. Его не остановила даже тюрьма</p>
           </li>
           <li>
             <Header>
               <span>2</span>
               <h3>Преимущество</h3>
             </Header>
-            <p>
-              Create your own annotations or automate labeling using our experts. Supervise training in real-time with
-              interactive tools and graphical results.
-            </p>
+            <p>Проповедник с телеэкрана вытягивал из верующих миллионы. Его не остановила даже тюрьма</p>
           </li>
           <li>
             <Header>
               <span>3</span>
               <h3>Преимущество</h3>
             </Header>
-            <p>
-              Create your own annotations or automate labeling using our experts. Supervise training in real-time with
-              interactive tools and graphical results.
-            </p>
+            <p>Проповедник с телеэкрана вытягивал из верующих миллионы. Его не остановила даже тюрьма</p>
           </li>
         </ul>
       </Container>
@@ -44,6 +35,8 @@ export const Features = () => {
 }
 
 const Root = styled.header`
+  border-bottom: 1px solid #eee;
+  padding-bottom: 56px;
   ul {
     padding: 0;
     margin: 0;
@@ -58,6 +51,8 @@ const Root = styled.header`
         margin: 0;
         margin-left: 40px;
         font-size: 1rem;
+
+        line-height: 1.5;
       }
     }
   }

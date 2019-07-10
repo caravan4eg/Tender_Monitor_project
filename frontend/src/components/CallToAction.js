@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Container } from 'src/components/Container'
-import { Button } from 'src/components/Button'
+import { Container } from './Container'
+import { Button } from './Button'
 
 export const CallToAction = () => {
   return (
@@ -20,15 +20,12 @@ export const CallToAction = () => {
 
 const Root = styled.div`
   border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-
-  margin: 56px 0;
 `
 
 const Inner = styled.div`
   padding: 64px 0;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `

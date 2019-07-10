@@ -1,7 +1,10 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 
-import { Container } from 'src/components/Container'
-import { Button } from 'src/components/Button'
+import { Container } from './Container'
+import { Button } from './Button'
+
+import heroIllustration from '../../static/images/hero-illustration.png'
 
 export const Hero = () => {
   return (
@@ -10,9 +13,11 @@ export const Hero = () => {
         <Inner>
           <h1>Мониторинг тендеров и конкурсных закупок</h1>
           <h2>Пользуясь сервисом ТендерМонитор вы можете сосредоточиться на главном, а рутину предоставьте нам. </h2>
-          <Button>Давайте попробуем</Button>
+          <Link href="/fetch">
+            <Button>Давайте попробуем</Button>
+          </Link>
         </Inner>
-        <Promo src={'https://apres.io/static/media/concept-header.3b2837d9.png'} alt="" />
+        <Promo src={heroIllustration} alt="" />
       </Container>
     </Root>
   )

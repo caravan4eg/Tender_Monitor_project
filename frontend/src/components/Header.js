@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 
-import { Container } from 'src/components/Container'
+import { Container } from './Container'
+
+import logo from '../../static/images/logo.svg'
 
 export const Header = () => {
   return (
@@ -9,7 +11,9 @@ export const Header = () => {
       <Container>
         <Inner>
           <Link href="/">
-            <Logo href="/">ЛОГО</Logo>
+            <Logo href="/">
+              <img src={logo} />
+            </Logo>
           </Link>
 
           <Navigation>
@@ -37,11 +41,11 @@ export const Header = () => {
             </ul>
           </Navigation>
 
-          <Navigation>
+          <Navigation callToAction>
             <ul>
               <li>
                 <Link href="/">
-                  <a href="/">Попробовать бесплатно</a>
+                  <Action href="/">Попробовать бесплатно</Action>
                 </Link>
               </li>
             </ul>
@@ -57,7 +61,13 @@ const Root = styled.header`
 `
 
 const Logo = styled.a`
-  display: inline-block;
+  display: block;
+
+  img {
+    display: block;
+    width: auto;
+    height: 32px;
+  }
 `
 
 const Inner = styled.div`
@@ -79,13 +89,25 @@ const Navigation = styled.nav`
       &:last-child {
         margin-right: 0;
       }
-
-      a {
-        display: inline-block;
-        text-decoration: none;
-        padding-bottom: 24px;
-        padding-top: 24px;
-      }
     }
   }
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+    padding-bottom: 24px;
+    padding-top: 24px;
+
+    color: #000;
+
+    transition: all 0.3s;
+
+    &:hover {
+      opacity: 0.55;
+    }
+  }
+`
+
+const Action = styled.a`
+  color: ${({ theme }) => theme.colors.red} !important;
 `

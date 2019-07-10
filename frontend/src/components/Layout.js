@@ -1,8 +1,8 @@
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
-import { Header } from 'src/components/Header'
-import { ExtraHeader } from 'src/components/ExtraHeader'
-import { Footer } from 'src/components/Footer'
+import { Header } from './Header'
+import { ExtraHeader } from './ExtraHeader'
+import { Footer } from './Footer'
 
 const theme = {
   colors: {
@@ -15,13 +15,13 @@ export const Layout = ({ children }) => {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <ExtraHeader />
+        <>
+          <ExtraHeader />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </>
       </ThemeProvider>
-      <Header />
-      <ThemeProvider theme={theme}>
-        <main>{children}</main>
-      </ThemeProvider>
-      <Footer />
     </>
   )
 }
@@ -37,5 +37,9 @@ const GlobalStyle = createGlobalStyle`
     transition: all 0.4s cubic-bezier(0.3, 0.8, 0.2, 1) 0s;
     margin: 0;
     padding: 0;
+
+    & > * {
+      box-sizing: border-box;
+    }
   }
 `
