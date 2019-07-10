@@ -10,7 +10,7 @@
     <li>+ Install psycopg2 </li>
     <li>+ Config Postgresql database in settings.py </li>
     <li>+ Change home.html to display Tender list from the database via an HTML page</li>
-    <li>+ Create Web API service. REST API
+    <li>+ Create Web API service. Make endpoint for displaying Tenders list
         <ul>
             <li> + Install Django REST Framework - DRF -> pipenv install djangorestframework</li>
             <li> + Update django_project/settings.py -> 'rest_framework',</li>
@@ -21,11 +21,20 @@
             <li> + Update api/views.py -> class TendersAPIView</li>
             <li> + Create api/serializers.py - class TendersSerializer</li>
             <li> + Make pagination -> add rest_framework section to django_project/settings.py and
-                api/custompagination.py
-            </li>
+                api/custompagination.py</li>
         </ul>
     </li>
-    <li>- Make endpoint for displaying Quotes collection </li>
+    <li> + Tune Scrapy Spider
+        <ul>
+        <li> + scrapy_project/settings.py -> ROBOTSTXT_OBEY = False</li>
+        <li> + scrapy_project/settings.py -> COOKIES_ENABLED = False</li>
+        <li> + Create spider icetrade</li>
+        <li> + Create Items and Pipelines</li>
+        <li> + Update scrapy_project/settings.py -> ITEM_PIPELINES = {'scrapy_project.pipelines.TenderPipeline': 300,} </li>
+        <li> + Spider icetrade: runs manually from terminal-OK, exports to csv-OK, saves PostgreSQL-OK</li>
+    </ul>
+    </li>
+
     <li>- Extract fresh Quotes from site. Scrapy, Proxy, Cookies, User Agent </li>
     <li>- Process items to Sqlite database. Connect to db, Django ORM, process item</li>
     <li>- Run periodic background tasks. Celery and Redis </li>
