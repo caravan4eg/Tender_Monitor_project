@@ -7,10 +7,24 @@
     <li>+ Make simple Django Web server with HTML pages</li>
     <li>+ Create models at django_app/models.py </li>
     <li>+ Create Admin interface, superuser </li>
-    <li>+ Install psycopg2  </li>
+    <li>+ Install psycopg2 </li>
     <li>+ Config Postgresql database in settings.py </li>
     <li>+ Change home.html to display Tender list from the database via an HTML page</li>
-    <li>- Make Web API service. REST API</li>
+    <li>+ Create Web API service. REST API
+        <ul>
+            <li> + Install Django REST Framework - DRF -> pipenv install djangorestframework</li>
+            <li> + Update django_project/settings.py -> 'rest_framework',</li>
+            <li> + Create new applications to handle API -> python manage.py startapp api</li>
+            <li> + Update django_project/settings.py -> 'api',</li>
+            <li> + Update project level urls -> add path('api/v1/', include('api.urls')),</li>
+            <li> + Create and update api/urls.py and add route for TendersAPIView</li>
+            <li> + Update api/views.py -> class TendersAPIView</li>
+            <li> + Create api/serializers.py - class TendersSerializer</li>
+            <li> + Make pagination -> add rest_framework section to django_project/settings.py and
+                api/custompagination.py
+            </li>
+        </ul>
+    </li>
     <li>- Make endpoint for displaying Quotes collection </li>
     <li>- Extract fresh Quotes from site. Scrapy, Proxy, Cookies, User Agent </li>
     <li>- Process items to Sqlite database. Connect to db, Django ORM, process item</li>
