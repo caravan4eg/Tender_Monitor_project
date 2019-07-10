@@ -1,0 +1,20 @@
+<!-- templates/about.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h1>Tender Monitor workflow</h1>
+
+<ul>
+    <li>+ Make simple Django Web server with HTML pages</li>
+    <li>+ Create models at django_app/models.py </li>
+    <li>+ Create Admin interface, superuser </li>
+    <li>+ Install psycopg2  </li>
+    <li>+ Config Postgresql database in settings.py </li>
+    <li>+ Change home.html to display Tender list from the database via an HTML page</li>
+    <li>- Make Web API service. REST API</li>
+    <li>- Make endpoint for displaying Quotes collection </li>
+    <li>- Extract fresh Quotes from site. Scrapy, Proxy, Cookies, User Agent </li>
+    <li>- Process items to Sqlite database. Connect to db, Django ORM, process item</li>
+    <li>- Run periodic background tasks. Celery and Redis </li>
+</ul>
+
+{% endblock content %}

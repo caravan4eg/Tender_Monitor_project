@@ -1,4 +1,16 @@
 <!-- templates/home.html -->
-<h1>Tenders Monitor project. Homepage</h1>
+{% extends 'base.html' %}
 
-<p>Test html view</p>
+{% block content %}
+<h1>Tenders Monitor Project</h1>
+<h2>Tenders list</h2>
+<hr/>
+<ul>
+    {% for tender in all_tenders_list %}
+    <li>{{ tender.number }}</li>
+    {{ tender.description }}
+    <hr/>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
