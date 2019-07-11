@@ -38,16 +38,21 @@ What was done description.
         </ul>
     </li>
 
-    <li>- Tune up periodic crawling </li>
+    <li>- Tune up beckround task running </li>
     <ul>
-        <li>- Install Celery and Redis</li>
-        pip install -U Celery
-        touch django_project/celery.py
-        update  django_project/__init__.py
-        add redis celery config to # django_project/settings.py
+        <li>+ Install and Config Celery and Redis</li>
 
-        <li>- Create celery.py and tasks.py </li>
+        <li>Install Celery/Redis -> pip install -U Celery redis</li>
+        <li>Create celery.py and tasks.py
+            <li>Create Celery -> touch django_project/celery.py</li>
+            <li>Create task -> touch django_app/tasks.py</li>
+                <li>Update django_project/__init__.py</li>
+        <li>Add redis celery config to # django_project/settings.py</li>
+        run shel, workers, redis-server
+add celery.schedules to celery.py, run celery-beat
+        <li>-  </li>
         <li>- Check periodic task </li>
+
     </ul>
 </ul>
 
