@@ -1,4 +1,7 @@
 # scrapy_project/spiders/icetrade.py
+# TODO: improove proxy, user agent and headers rotation or increase delay
+# TODO: check get request real headers and addr which tracks server
+
 import scrapy
 from scrapy import signals
 from datetime import date
@@ -23,8 +26,8 @@ class IceSpiderSpider(scrapy.Spider):
     today_is = date.today().strftime("%d.%m.%Y")
     custom_settings = {
                     
-                    'CONCURRENT_REQUESTS': 2,
-                    'CONCURRENT_REQUESTS_PER_DOMAIN': 2,
+                    'CONCURRENT_REQUESTS': 1,
+                    'CONCURRENT_REQUESTS_PER_DOMAIN': 1,
                     'FEED_FORMAT': 'csv',
                     'FEED_URI': f'output/{today_is}_icetrade_tenders.csv',
                 }
@@ -69,10 +72,10 @@ class IceSpiderSpider(scrapy.Spider):
             # self.proxies[host_port] = 0
             # print(f'~~~~~~~~~~~~ Proxy URL: {host_port}  ~~~~~~~~~~')
 
-            if ('elite proxy' in row_data) or ('anonymous' in row_data): #
+            if ('elite proxy' in row_data): #or ('anonymous' in row_data): #
                 host_port = row_data[0]+':'+row_data[1]
                 self.proxies[host_port] = 0
-                print(f'Elite/anonymous proxy URL: {host_port}')
+                print(f'Elite proxy URL: {host_port}')
 
                 
 

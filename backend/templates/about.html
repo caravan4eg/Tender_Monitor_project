@@ -38,22 +38,21 @@ What was done description.
         </ul>
     </li>
 
-    <li>- Tune up beckround task running </li>
+    <li> + Tune up backround task running </li>
     <ul>
-        <li>+ Install and Config Celery and Redis</li>
-
-        <li>Install Celery/Redis -> pip install -U Celery redis</li>
-        <li>Create celery.py and tasks.py
-            <li>Create Celery -> touch django_project/celery.py</li>
-            <li>Create task -> touch django_app/tasks.py</li>
-                <li>Update django_project/__init__.py</li>
-        <li>Add redis celery config to # django_project/settings.py</li>
-        run shel, workers, redis-server
-add celery.schedules to celery.py, run celery-beat
-        <li>-  </li>
-        <li>- Check periodic task </li>
-
+        <li> + Install and Config Celery and Redis</li>
+        <li> + Install Celery/Redis -> pip install -U Celery redis</li>
+        <li> + Create celery.py and tasks.py
+        <li> + Create Celery -> touch django_project/celery.py</li>
+        <li> + Create task -> touch django_app/tasks.py</li>
+        <li> + Update django_project/__init__.py</li>
+        <li> + Add redis celery config to # django_project/settings.py</li>
+        <li> + Run shell, workers, redis-server</li>
+        <li> + Add celery.schedules to celery.py, run celery-beat</li>
+        <li> + Check periodic task </li>
     </ul>
+    <li> - Implement filtering </li>
+    <li> - Deploy to production </li>
 </ul>
 
 {% endblock content %}
