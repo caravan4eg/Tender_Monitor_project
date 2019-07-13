@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Menu } from 'react-feather'
 import Link from 'next/link'
 
 import { Container } from './Container'
@@ -18,26 +19,13 @@ export const Header = () => {
 
           <Navigation>
             <ul>
-              <li>
-                <Link href="/">
-                  <a href="/">Продукты</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <a href="/">Ресурсы</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <a href="/">Стоимость</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <a href="/">Как это работает</a>
-                </Link>
-              </li>
+              {links.map(({ slug, title }) => (
+                <li key={title}>
+                  <Link href={`/${slug}`}>
+                    <a href={`/${slug}`}>{title}</a>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </Navigation>
 
@@ -50,11 +38,21 @@ export const Header = () => {
               </li>
             </ul>
           </Navigation>
+          <BurgerMenu>
+            <MenuIcon />
+          </BurgerMenu>
         </Inner>
       </Container>
     </Root>
   )
 }
+
+const links = [
+  { slug: '/', title: 'Продукты' },
+  { slug: '/', title: 'Ресуры' },
+  { slug: '/', title: 'Стоимость' },
+  { slug: '/', title: 'Как это работает' },
+]
 
 const Root = styled.header`
   border-bottom: 1px solid #eee;
@@ -105,9 +103,25 @@ const Navigation = styled.nav`
     &:hover {
       opacity: 0.55;
     }
+
+    @media (max-width: 980px) {
+      display: none;
+    }
   }
 `
 
 const Action = styled.a`
+  color: ${({ theme }) => theme.colors.red} !important;
+`
+
+const BurgerMenu = styled.div`
+  padding-top: 16px;
+  padding-bottom: 16px;
+  @media (min-width: 980px) {
+    display: none;
+  }
+`
+
+const MenuIcon = styled(Menu)`
   color: ${({ theme }) => theme.colors.red} !important;
 `

@@ -5,8 +5,8 @@ export const Container = ({ children }) => {
 }
 
 const Root = styled.div`
-  max-width: 100%;
-  width: 1140px;
+  width: 100%;
+  max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
 

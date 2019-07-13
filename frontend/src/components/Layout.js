@@ -1,4 +1,5 @@
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
+import { modernNormalize } from 'styled-modern-normalize'
 
 import { Header } from './Header'
 import { ExtraHeader } from './ExtraHeader'
@@ -27,19 +28,12 @@ export const Layout = ({ children }) => {
 }
 
 const GlobalStyle = createGlobalStyle`
+${modernNormalize}
+
   body {
     color: #161616;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    font-size: 1.2rem;
     -webkit-font-smoothing: antialiased;
-    line-height: 1.4;
-    background: #fff;
     transition: all 0.4s cubic-bezier(0.3, 0.8, 0.2, 1) 0s;
-    margin: 0;
-    padding: 0;
-
-    & > * {
-      box-sizing: border-box;
-    }
   }
 `
