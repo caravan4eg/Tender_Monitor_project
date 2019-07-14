@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 
-import { Container } from './Container'
-import { Button } from './Button'
-
-import heroIllustration from '../../static/images/hero-illustration.png'
+import { Container } from 'components/Container'
+import { Button } from 'components/Button'
+import heroIllustration from 'static/images/hero-illustration.png'
 
 export const Hero = () => {
   return (

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Container } from './Container'
+import { Container } from 'components/Container'
 
 export const Features = () => {
   return (

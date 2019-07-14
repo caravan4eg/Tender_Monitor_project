@@ -2,9 +2,8 @@ import styled from 'styled-components'
 import { Menu } from 'react-feather'
 import Link from 'next/link'
 
-import { Container } from './Container'
-
-import logo from '../../static/images/logo.svg'
+import { Container } from 'components/Container'
+import logo from 'static/images/logo.svg'
 
 export const Header = () => {
   return (

@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 
-import { Container } from '../components/Container'
-
-import promoPic from '../../static/images/review-illustration.png'
+import { Container } from 'components/Container'
+import promoPic from 'static/images/review-illustration.png'
 
 export const Feature = () => {
   return (
