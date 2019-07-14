@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { Search } from 'react-feather'
 
-import { searchByWord } from '../src/services/api'
-import { Layout } from '../src/components/Layout'
-import { Container } from '../src/components/Container'
+import { searchByWord } from 'services/api'
+import { Layout } from 'components/Layout'
+import { Container } from 'components/Container'
+import { Loading } from 'components/Loading'
 
 export const DemoPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState()
+  const [loading, setLoading] = useState(false)
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.currentTarget.value)
@@ -16,8 +18,10 @@ export const DemoPage = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const results = await searchByWord(searchQuery)
     setSearchResults(results.results)
+    setLoading(false)
     console.log(results.results)
   }
 
@@ -30,31 +34,38 @@ export const DemoPage = () => {
             <Search color={'#fff'} />
           </SearchButton>
         </Form>
+        {loading && <Loading width={'92px'} height={'92px'} />}
 
-        <h1>Результаты:</h1>
+        {searchResults && (
+          <>
+            <h1>Результаты:</h1>
 
-        <Table>
-          <thead>
-            <tr>
-              <th>Заказчик</th>
-              <th>Описание</th>
-              <th>Ссылка на тендер</th>
-            </tr>
-          </thead>
-          <tbody>
-            {searchResults.map(({ id, customer, description, url_addr }) => (
-              <tr key={id}>
-                <td>{customer}</td>
-                <td>{description}</td>
-                <td>
-                  <a href={url_addr} target="_blank">
-                    Ссылка на тендер
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+            <Table>
+              <thead>
+                <tr>
+                  <th>Заказчик</th>
+                  <th>Описание</th>
+                  <th>Дата завершения</th>
+                  <th>Ссылка на тендер</th>
+                </tr>
+              </thead>
+              <tbody>
+                {searchResults.map(({ id, customer, description, url_addr, deadline }) => (
+                  <tr key={id}>
+                    <td>{customer}</td>
+                    <td>{description}</td>
+                    <td>{deadline}</td>
+                    <td>
+                      <a href={url_addr} target="_blank">
+                        Ссылка на тендер
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </>
+        )}
       </Container>
     </Layout>
   )
@@ -62,17 +73,16 @@ export const DemoPage = () => {
 
 export default DemoPage
 
-// DemoPage.getInitialProps = async () => {
-//   const res = await ky(getData('categories'))
-//   const data = await res.json()
-//   return { data }
-// }
-
 const SearchInput = styled.input`
   width: 100%;
   padding: 16px;
   border-radius: 4px 0 0 4px;
   border: 1px solid #eee;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
 `
 
 const SearchButton = styled.button`
@@ -97,12 +107,14 @@ const Table = styled.table`
   width: 100%;
   border: 1px solid #eee;
   border-collapse: collapse;
+  margin-bottom: 32px;
 
   thead {
     th {
-      background-color: #fff;
+      background-color: #f9fafb;
       position: sticky;
-      top: 0;
+      z-index: 20;
+      top: -1px;
     }
   }
 
@@ -118,5 +130,7 @@ const Table = styled.table`
 
   td {
     min-width: 240px;
+    font-size: 14px;
+    line-height: 140%;
   }
 `
