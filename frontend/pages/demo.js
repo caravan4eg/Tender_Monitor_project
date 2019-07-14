@@ -1,5 +1,6 @@
 import ky from 'ky-universal'
 
+import { getData } from '../src/services/api'
 import { Layout } from '../src/components/Layout'
 import { Container } from '../src/components/Container'
 
@@ -19,7 +20,7 @@ export const DemoPage = ({ data }) => {
 export default DemoPage
 
 DemoPage.getInitialProps = async () => {
-  const res = await ky('http://tender-monitor.herokuapp.com/api/categories/')
+  const res = await ky(getData('categories'))
   const data = await res.json()
   return { data }
 }
