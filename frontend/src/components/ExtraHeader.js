@@ -7,7 +7,12 @@ export const ExtraHeader = () => {
     <Root>
       <Container>
         <Inner>
-          <Message>Это альфа версия продукта, донт джадж ми плиз 👋</Message>
+          <Message>
+            Продукт находится в альфа-версии{' '}
+            <span role="img" aria-label="smile">
+              😜
+            </span>
+          </Message>
         </Inner>
       </Container>
     </Root>

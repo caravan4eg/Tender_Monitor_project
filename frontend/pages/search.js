@@ -1,15 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Search } from 'react-feather'
 
-import { searchByWord } from 'services/api'
+import { searchByWord, getAllCategories } from 'services/api'
 import { Layout } from 'components/Layout'
 import { Container } from 'components/Container'
 import { Loading } from 'components/Loading'
 
-export const DemoPage = () => {
+export const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState()
+  const [allCategories, setAllCategories] = useState([])
   const [loading, setLoading] = useState(false)
 
   const handleSearchInputChange = (e) => {
@@ -25,11 +26,26 @@ export const DemoPage = () => {
     console.log(results.results)
   }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const categories = await getAllCategories()
+      setAllCategories(categories.results)
+    }
+
+    fetchData()
+  }, [])
+
+  console.log(allCategories)
   return (
     <Layout>
       <Container>
         <Form onSubmit={handleSearch}>
-          <SearchInput type="search" value={searchQuery} onChange={handleSearchInputChange} placeholder="Поиск..." />
+          <SearchInput
+            type="search"
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+            placeholder="Поиск по ключевому слову..."
+          />
           <SearchButton>
             <Search color={'#fff'} />
           </SearchButton>
@@ -66,12 +82,21 @@ export const DemoPage = () => {
             </Table>
           </>
         )}
+
+        <div>
+          {allCategories.map(({ category_name }) => (
+            <label>
+              <input type="radio"></input>
+              <h1>{category_name}</h1>
+            </label>
+          ))}
+        </div>
       </Container>
     </Layout>
   )
 }
 
-export default DemoPage
+export default SearchPage
 
 const SearchInput = styled.input`
   width: 100%;

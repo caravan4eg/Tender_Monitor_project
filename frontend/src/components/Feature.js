@@ -19,7 +19,7 @@ export const Feature = () => {
               <a href="/">Get started with TenderMonitor</a>
             </Link>
           </div>
-          <div style={{ flexBasis: '40%' }}>
+          <div style={{ flexBasis: '50%' }}>
             <img src={promoPic} />
           </div>
         </Inner>
@@ -37,11 +37,12 @@ const Root = styled.section`
   }
 
   p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    line-height: 140%;
   }
 
   a {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: ${({ theme }) => theme.colors.red};
   }

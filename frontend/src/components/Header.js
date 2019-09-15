@@ -32,7 +32,12 @@ export const Header = () => {
             <ul>
               <li>
                 <Link href="/">
-                  <Action href="/">Попробовать бесплатно</Action>
+                  <a href="/">Войти</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <Action href="/">Регистрация</Action>
                 </Link>
               </li>
             </ul>
@@ -47,10 +52,11 @@ export const Header = () => {
 }
 
 const links = [
-  { slug: '/', title: 'Продукты' },
-  { slug: '/', title: 'Ресуры' },
-  { slug: '/', title: 'Стоимость' },
-  { slug: '/', title: 'Как это работает' },
+  { slug: '/', title: 'О сервисе' },
+  { slug: 'search', title: 'Поиск' },
+  { slug: '/', title: 'Тарифы' },
+  { slug: '/', title: 'Помощь' },
+  { slug: '/', title: 'Контакты' },
 ]
 
 const Root = styled.header`

@@ -12,3 +12,9 @@ export const searchByWord = async (query) => {
   const data = await result.json()
   return data
 }
+
+export const getAllCategories = async () => {
+  const result = await ky(`${API_URL}/${API_VERSION}/categories/`)
+  const data = await result.json()
+  return data
+}
